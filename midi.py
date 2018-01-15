@@ -34,6 +34,10 @@ class Midi:
       'A#' : 0x0A,
     }
 
+  def set_channel(self, channel):
+    if channel in range(0, 15):
+      self.channel = channel
+
   def send_command(self, command, data):
     uart.write(self.channel)
     uart.write(bytes(command))
