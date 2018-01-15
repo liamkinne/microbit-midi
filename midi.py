@@ -17,4 +17,4 @@ class Midi:
     }
 
   def send_command(self, command, data):
-    #
+    uart.write(bytes([command | data]))
