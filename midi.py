@@ -1,4 +1,4 @@
-#from microbit import *
+from microbit import *
 
 class Midi:
   def __init__(self, pin_tx, pin_rx):
