@@ -1,4 +1,4 @@
-from microbit import *
+#from microbit import *
 
 class Midi:
   def __init__(self, pin_tx, pin_rx):
@@ -16,5 +16,32 @@ class Midi:
       'non_musical' : 0xF0,
     }
 
+    self.note_offset = {
+      'C'  : 0x00,
+      'C#' : 0x01,
+      'D'  : 0x02,
+      'D#' : 0x03,
+      'E'  : 0x04,
+      'F'  : 0x05,
+      'F#' : 0x06,
+      'G'  : 0x07,
+      'G#' : 0x08,
+      'A'  : 0x09,
+      'A#' : 0x0A,
+    }
+
   def send_command(self, command, data):
     uart.write(bytes([command | data]))
+
+  def split_note(self, note):
+    if note[1] == "#":
+      octave = note[2:]
+      note = note[:2]
+    else:
+      octave = note[1:]
+      note = note[:1]
+    return note, int(octave)
+
+  def note_to_hex(self, note):
+    note, octave = self.split_note(note)
+    return hex(self.note_offset[note] + ((octave + 1) * 12))
