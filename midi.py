@@ -45,7 +45,7 @@ class Midi:
       uart.write(d)
 
   def split_note(self, note):
-    if note[1] == "#":
+    if note[1] == '#':
       octave = note[2:]
       note = note[:2]
     else:
