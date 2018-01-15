@@ -5,6 +5,10 @@ class Midi:
     self.pin_tx = pin_tx
     self.pin_rx = pin_rx
 
+    self.channel = 0
+
+    uart.init(baudrate=31250, bits=8, parity=None, stop=1, tx=self.pin_tx)
+
     self.commands = {
       'note_off' : 0x80,
       'note_on' : 0x90,
@@ -31,6 +35,7 @@ class Midi:
     }
 
   def send_command(self, command, data):
+    uart.write(self.channel)
     uart.write(bytes(command))
     for d in data:
       uart.write(d)
