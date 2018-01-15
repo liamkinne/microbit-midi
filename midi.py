@@ -39,6 +39,7 @@ class Midi:
       self.channel = channel
 
   def send_command(self, command, data):
+    # todo: this may need to be a single set of bytes rather than multiple writes
     uart.write(self.channel)
     uart.write(bytes(command))
     for d in data:
