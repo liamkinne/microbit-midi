@@ -6,8 +6,14 @@ class Midi:
     self.pin_rx = pin_rx
 
     self.channel = 0
-    
-    uart.init(baudrate=31250, bits=8, parity=None, stop=1, tx=self.pin_tx)
+
+    # uart settings
+    self.uart_config = {
+      'baud' : 31250,
+      'bits' : 8,
+      'parity' : None,
+      'stop' : 1,
+    }
 
     self.commands = {
       'note_off' : 0x80,
@@ -39,9 +45,11 @@ class Midi:
       self.channel = channel
 
   def send_command(self, command, data):
+    uart.init(baudrate=uart_config['baud'], bits=uart_config['bits'], parity=uart_config['parity'], stop=uart_config['stop'], tx=self.pin_tx, rx=self.pin_rx)
     output = [command | self.channel]
     output.extend(data)
     uart.write(output)
+    uart.init(115200) # restore usb coms
 
   def split_note(self, note):
     if note[1] == '#':
