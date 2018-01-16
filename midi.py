@@ -66,3 +66,6 @@ class Midi:
 
   def note_on(self, note, velocity):
     self.send_command(self.commands['note_on'], (self.note_to_hex(note), velocity))
+
+  def note_off(self, note, velocity):
+    self.send_command(self.commands['note_off'], (self.note_to_hex(note), velocity))
