@@ -45,7 +45,7 @@ class Midi:
       self.channel = channel
 
   def send_command(self, command, data):
-    uart.init(baudrate=uart_config['baud'], bits=uart_config['bits'], parity=uart_config['parity'], stop=uart_config['stop'], tx=self.pin_tx, rx=self.pin_rx)
+    uart.init(baudrate=self.uart_config['baud'], bits=self.uart_config['bits'], parity=self.uart_config['parity'], stop=self.uart_config['stop'], tx=self.pin_tx, rx=self.pin_rx)
     output = [command | self.channel]
     output.extend(data)
     uart.write(output)
