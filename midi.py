@@ -48,7 +48,7 @@ class Midi:
     uart.init(baudrate=self.uart_config['baud'], bits=self.uart_config['bits'], parity=self.uart_config['parity'], stop=self.uart_config['stop'], tx=self.pin_tx, rx=self.pin_rx)
     output = [command | self.channel]
     output.extend(data)
-    uart.write(output)
+    uart.write(bytes(output))
     uart.init(115200) # restore usb coms
 
   def split_note(self, note):
