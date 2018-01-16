@@ -39,11 +39,9 @@ class Midi:
       self.channel = channel
 
   def send_command(self, command, data):
-    # todo: this may need to be a single set of bytes rather than multiple writes
-    uart.write(self.channel)
-    uart.write(bytes(command))
-    for d in data:
-      uart.write(d)
+    output = [command | self.channel]
+    output.extend(data)
+    uart.write(output)
 
   def split_note(self, note):
     if note[1] == '#':
