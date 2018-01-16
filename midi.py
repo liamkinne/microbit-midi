@@ -38,6 +38,7 @@ class Midi:
       'G#' : 0x08,
       'A'  : 0x09,
       'A#' : 0x0A,
+      'B'  : 0x0B,
     }
 
   def set_channel(self, channel):
