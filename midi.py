@@ -6,8 +6,8 @@ class Midi:
     self.pin_rx = pin_rx
 
     self.channel = 0
-
-    uart.init(baudrate=31250, bits=8, parity=None, stop=1, tx=self.pin_tx)
+    def midi.start()
+        uart.init(baudrate=31250, bits=8, parity=None, stop=1, tx=self.pin_tx)
 
     self.commands = {
       'note_off' : 0x80,
