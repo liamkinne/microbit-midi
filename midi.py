@@ -63,7 +63,7 @@ class Midi:
 
   def note_to_hex(self, note):
     note, octave = self.split_note(note)
-    return hex(self.note_offset[note] + ((octave + 1) * 12))
+    return int(self.note_offset[note] + ((octave + 1) * 12))
 
   def note_on(self, note, velocity):
     self.send_command(self.commands['note_on'], (self.note_to_hex(note), velocity))
