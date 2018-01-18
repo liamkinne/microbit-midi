@@ -6,6 +6,7 @@ class Midi:
     self.pin_rx = pin_rx
 
     self.channel = 0
+    self.instrument = 0
 
     # uart settings
     self.uart_config = {
@@ -44,6 +45,12 @@ class Midi:
   def set_channel(self, channel):
     if channel in range(0, 15):
       self.channel = channel
+
+  def set_instrument(self, instrument):
+    instrument -= 1
+    if instrument in range(0, 128):
+      msg = bytes([self.commands['continuous_controller'] | self.channel, instrument])
+      uart.write(msg)
 
   def send_command(self, command, data):
     uart.init(baudrate=self.uart_config['baud'], bits=self.uart_config['bits'], parity=self.uart_config['parity'], stop=self.uart_config['stop'], tx=self.pin_tx, rx=self.pin_rx)
